@@ -1,9 +1,9 @@
 services:
-  vacant-lots-proj:
+  vacant-lots-proj-experimental:
     build:
       context: .
       dockerfile: Dockerfile
-    image: vacant-lots-proj:latest
+    image: vacant-lots-proj-experimental:latest
     environment:
       - GOOGLE_APPLICATION_CREDENTIALS=/app/service-account-key.json
       - CFP_MAPBOX_TOKEN_UPLOADER
@@ -22,7 +22,7 @@ services:
       - host.docker.internal:host-gateway
     network_mode: 'host'
 
-  formatter:
+  formatter-experimental:
     build:
       context: .
     volumes:
@@ -30,7 +30,7 @@ services:
     command: sh -c "pip install ruff && ruff format --exclude '/usr/src/app/awkde/'"
     network_mode: 'host'
 
-  linter:
+  linter-experimental:
     build:
       context: .
     volumes:
@@ -38,7 +38,7 @@ services:
     command: sh -c "pip install ruff && ruff check --fix --exclude '/usr/src/app/awkde/'"
     network_mode: 'host'
 
-  streetview:
+  streetview-experimental:
     build:
       context: .
     environment:
@@ -56,8 +56,8 @@ services:
       - host.docker.internal:host-gateway
     network_mode: 'host'
 
-  postgres:
-    container_name: cagp-postgres
+  postgres-experimental:
+    container_name: cagp-postgres-experimental
     build:
       context: .
       dockerfile: Dockerfile-pg
